@@ -3,29 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your Name — Designer</title>
-<meta name="description" content="Designer based in Singapore. Spatial, brand, and personal projects.">
+<title>Nikhita George — Experiential Designer</title>
+<meta name="description" content="Experiential designer based in Singapore, working across spatial design, brand, and personal projects.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hanken+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 /* ════════════════════════════════════════════
    TOKENS
    ════════════════════════════════════════════ */
 :root {
-  --bg:      #0E0B08;        /* deep warm black */
-  --bg-soft: #16110C;
-  --ink:     #F0EBE0;        /* warm cream */
-  --muted:   #6B6256;
-  --line:    rgba(240,235,224,0.12);
-  --accent:  #E94A1F;        /* hot vermilion */
-  --accent-soft: rgba(233,74,31,0.15);
+  --bg:      #080A0F;        /* deep blue-black */
+  --bg-soft: #101722;
+  --ink:     #F2F6FF;        /* soft clean white */
+  --muted:   #7D8796;
+  --line:    rgba(242,246,255,0.12);
+  --accent:  #6EA8FF;        /* clean soft blue */
+  --accent-soft: rgba(110,168,255,0.16);
 
-  --serif: 'Fraunces', serif;
-  --sans:  'Hanken Grotesk', system-ui, sans-serif;
-  --mono:  'JetBrains Mono', ui-monospace, monospace;
+  --serif: 'Geist', system-ui, sans-serif;
+  --sans:  'Geist', system-ui, sans-serif;
+  --mono:  'Geist Mono', ui-monospace, monospace;
 
   --pad: 40px;
   --container: 1400px;
@@ -61,6 +61,8 @@ a { color: inherit; text-decoration: none; }
   width: 100vw;
   height: 100vh;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
 }
 
 /* film grain over everything */
@@ -99,7 +101,7 @@ a { color: inherit; text-decoration: none; }
   mix-blend-mode: difference;
 }
 .cursor.is-hover {
-  width: 56px; height: 56px;
+  width: 34px; height: 34px;
   background: var(--ink);
 }
 @media (max-width: 900px) { .cursor { display: none; } }
@@ -216,13 +218,13 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(64px, 13vw, 240px);
   line-height: 0.85;
   letter-spacing: -0.045em;
-  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+  
   margin-bottom: 0;
 }
 .hero h1 em {
   font-style: italic;
   color: var(--accent);
-  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  
   font-weight: 300;
 }
 .hero h1 .stroke {
@@ -243,7 +245,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 380px;
   font-size: 15px;
   line-height: 1.6;
-  color: rgba(240,235,224,0.7);
+  color: rgba(242,246,255,0.72);
 }
 .hero-meta {
   font-family: var(--mono);
@@ -262,8 +264,9 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 32px 0;
-  background: var(--bg);
+  padding: 18px 0;
+  background: rgba(8, 10, 15, 0.52);
+  backdrop-filter: blur(12px);
   position: relative;
   z-index: 3;
 }
@@ -274,7 +277,7 @@ a { color: inherit; text-decoration: none; }
   animation: scroll 50s linear infinite;
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(28px, 4vw, 56px);
+  font-size: clamp(15px, 1.8vw, 26px);
   font-weight: 300;
   width: max-content;
 }
@@ -299,12 +302,12 @@ a { color: inherit; text-decoration: none; }
   line-height: 0.9;
   letter-spacing: -0.035em;
   max-width: 900px;
-  font-variation-settings: 'SOFT' 50;
+  
 }
 .section-head h2 em {
   font-style: italic;
   color: var(--accent);
-  font-variation-settings: 'SOFT' 100;
+  
 }
 .section-head .meta {
   font-family: var(--mono);
@@ -333,7 +336,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 100px var(--pad) 60px;
+  padding: 100px var(--pad) 72px;
   pointer-events: none;
 }
 .work-sticky > * { pointer-events: auto; }
@@ -387,12 +390,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 .work-hint {
+  position: absolute;
+  left: var(--pad);
+  bottom: 34px;
+  max-width: 280px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--muted);
-  text-align: center;
+  text-align: left;
+  opacity: 0.72;
 }
 .work-hint span { color: var(--accent); }
 
@@ -453,9 +461,9 @@ a { color: inherit; text-decoration: none; }
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.05;
-  font-variation-settings: 'SOFT' 50;
+  
 }
-.exp-role em { font-style: italic; color: var(--accent); font-variation-settings: 'SOFT' 100; }
+.exp-role em { font-style: italic; color: var(--accent);  }
 .exp-company {
   font-family: var(--mono);
   font-size: 13px;
@@ -534,9 +542,9 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.35;
   letter-spacing: -0.015em;
   margin-bottom: 32px;
-  font-variation-settings: 'SOFT' 50;
+  
 }
-.about-text p em { font-style: italic; color: var(--accent); font-variation-settings: 'SOFT' 100; }
+.about-text p em { font-style: italic; color: var(--accent);  }
 .about-text p:last-of-type { margin-bottom: 0; }
 
 .about-facts {
@@ -615,17 +623,17 @@ a { color: inherit; text-decoration: none; }
 .book-info-title { font-weight: 500; font-size: 14px; }
 .book-info-note { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
 
-.cover-1 { background: #0E0B08; color: #F0EBE0; border: 1px solid rgba(240,235,224,0.15); }
-.cover-1 .book-cover-author { color: #E94A1F; }
-.cover-2 { background: #E94A1F; color: #F0EBE0; }
-.cover-3 { background: #2A2438; color: #DCD7EE; }
-.cover-3 .book-cover-author { color: #B4A8E0; }
-.cover-4 { background: #1F2A1B; color: #C8D6BE; }
-.cover-4 .book-cover-author { color: #8BA67C; }
-.cover-5 { background: #3D1E2A; color: #F0D5D5; }
-.cover-5 .book-cover-author { color: #F0D5D5; }
-.cover-6 { background: #F0EBE0; color: #0E0B08; }
-.cover-6 .book-cover-author { color: #E94A1F; }
+.cover-1 { background: #080A0F; color: #F2F6FF; border: 1px solid rgba(242,246,255,0.15); }
+.cover-1 .book-cover-author { color: #6EA8FF; }
+.cover-2 { background: #CFE0FF; color: #080A0F; }
+.cover-3 { background: #1A2436; color: #DCE8FF; }
+.cover-3 .book-cover-author { color: #9EC5FF; }
+.cover-4 { background: #102D3E; color: #D5F1FF; }
+.cover-4 .book-cover-author { color: #7DBEEE; }
+.cover-5 { background: #E8EEF8; color: #172033; }
+.cover-5 .book-cover-author { color: #4D7FC4; }
+.cover-6 { background: #F2F6FF; color: #080A0F; }
+.cover-6 .book-cover-author { color: #4D7FC4; }
 
 /* ════════════════════════════════════════════
    CONTACT
@@ -650,7 +658,7 @@ a { color: inherit; text-decoration: none; }
 .contact h2 em {
   font-style: italic;
   color: var(--accent);
-  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  
 }
 .contact-email {
   font-family: var(--serif);
@@ -759,7 +767,7 @@ a { color: inherit; text-decoration: none; }
 <nav class="nav">
   <a class="nav-brand" href="#top" data-cursor>
     <span class="dot"></span>
-    <span>your name</span>     <!-- TODO -->
+    <span>Nikhi</span>     <!-- TODO -->
   </a>
   <ul class="nav-links">
     <li><a href="#work" data-cursor>Work</a></li>
@@ -774,7 +782,7 @@ a { color: inherit; text-decoration: none; }
 
 <!-- ═════════ HERO ═════════ -->
 <header class="hero container" id="top">
-  <span class="hero-tag reveal">Available for projects · Jan 2026</span>
+  <span class="hero-tag reveal">Experiential designer · Singapore</span>
 
   <h1 class="reveal" data-delay="1">
     making<br>
@@ -785,12 +793,10 @@ a { color: inherit; text-decoration: none; }
   <div class="hero-foot">
     <p class="hero-intro reveal" data-delay="2">
       <!-- TODO: your intro -->
-      Designer based in Singapore, working across spatial, brand
-      and the occasional personal experiment. Currently at
-      WWM Design.
+      Experiential designer based in Singapore, working across architecture, spatial stories, brand moments and the occasional personal experiment. Currently at WWM Design.
     </p>
     <div class="hero-meta reveal" data-delay="3">
-      Scroll to explore<span>↓ six projects</span>
+      Scroll to explore<span>↓ selected works</span>
     </div>
   </div>
 </header>
@@ -830,7 +836,7 @@ a { color: inherit; text-decoration: none; }
       <div class="work-counter"><span id="proj-current">01</span><span>—</span><span>06</span></div>
       <div class="work-progress"><span id="progress-bar"></span></div>
       <div class="work-counter">
-        <span id="proj-name">Honey &amp; Co.</span>
+        <span id="proj-name">Pemimpin Terrace</span>
         <strong id="proj-tag">Professional</strong>
       </div>
     </div>
@@ -907,7 +913,7 @@ a { color: inherit; text-decoration: none; }
     <p class="reveal" data-delay="2">
       Outside the studio you'll find me hunting for cafés with
       good light, collecting reference photos of staircases
-      and rereading the books on the shelf below.
+      and rearranging the things on the shelf below.
     </p>
 
     <ul class="about-facts reveal" data-delay="3">
@@ -925,75 +931,75 @@ a { color: inherit; text-decoration: none; }
 <!-- ═════════ BOOKS ═════════ -->
 <section class="books container">
   <div class="section-head">
-    <h2 class="reveal">Books on the <em>shelf</em></h2>
-    <div class="meta reveal" data-delay="1">Read · Rereading<br><span>Six favourites</span></div>
+    <h2 class="reveal">Things on my <em>shelf</em></h2>
+    <div class="meta reveal" data-delay="1">Collected · loved<br><span>Six little tells</span></div>
   </div>
 
   <div class="books-grid">
 
     <a class="book reveal" href="#" data-cursor>
       <div class="book-cover cover-1">
-        <span class="book-cover-author">Bruno Munari</span>
-        <span class="book-cover-title">Design<br>as Art</span>
+        <span class="book-cover-author">Moka ritual</span>
+        <span class="book-cover-title">Coffee<br>things</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">Design as Art</span>
-        <span class="book-info-note">Reread '24</span>
+        <span class="book-info-title">Moka pot</span>
+        <span class="book-info-note">Daily fuel</span>
       </div>
     </a>
 
     <a class="book reveal" data-delay="1" href="#" data-cursor>
       <div class="book-cover cover-2">
-        <span class="book-cover-author">Kenya Hara</span>
-        <span class="book-cover-title">White</span>
+        <span class="book-cover-author">Café notes</span>
+        <span class="book-cover-title">Tiny<br>notebook</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">White</span>
-        <span class="book-info-note">Essential</span>
+        <span class="book-info-title">Café notebook</span>
+        <span class="book-info-note">Good light</span>
       </div>
     </a>
 
     <a class="book reveal" data-delay="2" href="#" data-cursor>
       <div class="book-cover cover-3">
-        <span class="book-cover-author">Peter Zumthor</span>
-        <span class="book-cover-title">Thinking<br>Architecture</span>
+        <span class="book-cover-author">Nicco</span>
+        <span class="book-cover-title">Pup<br>chaos</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">Thinking Architecture</span>
-        <span class="book-info-note">A favourite</span>
+        <span class="book-info-title">Nicco things</span>
+        <span class="book-info-note">Always near</span>
       </div>
     </a>
 
     <a class="book reveal" href="#" data-cursor>
       <div class="book-cover cover-4">
-        <span class="book-cover-author">Ellen Lupton</span>
-        <span class="book-cover-title">Thinking<br>with Type</span>
+        <span class="book-cover-author">Reference pile</span>
+        <span class="book-cover-title">Stairs<br>& signs</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">Thinking with Type</span>
-        <span class="book-info-note">School days</span>
+        <span class="book-info-title">Reference photos</span>
+        <span class="book-info-note">Ongoing</span>
       </div>
     </a>
 
     <a class="book reveal" data-delay="1" href="#" data-cursor>
       <div class="book-cover cover-5">
-        <span class="book-cover-author">Jun'ichirō Tanizaki</span>
-        <span class="book-cover-title">In Praise<br>of Shadows</span>
+        <span class="book-cover-author">Soft objects</span>
+        <span class="book-cover-title">Ribbons<br>& clips</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">In Praise of Shadows</span>
-        <span class="book-info-note">A favourite</span>
+        <span class="book-info-title">Soft objects</span>
+        <span class="book-info-note">Cute detail</span>
       </div>
     </a>
 
     <a class="book reveal" data-delay="2" href="#" data-cursor>
       <div class="book-cover cover-6">
-        <span class="book-cover-author">Massimo Vignelli</span>
-        <span class="book-cover-title">The Vignelli<br>Canon</span>
+        <span class="book-cover-author">Design books</span>
+        <span class="book-cover-title">Still<br>books</span>
       </div>
       <div class="book-info">
-        <span class="book-info-title">The Vignelli Canon</span>
-        <span class="book-info-note">Free PDF</span>
+        <span class="book-info-title">Design books</span>
+        <span class="book-info-note">Kept close</span>
       </div>
     </a>
 
@@ -1022,7 +1028,7 @@ a { color: inherit; text-decoration: none; }
 
 <!-- ═════════ FOOTER ═════════ -->
 <footer class="footer">
-  <span>© <span id="year"></span> Your Name · Singapore</span>
+  <span>© <span id="year"></span> Nikhita George · Singapore</span>
   <span>Designed &amp; coded with care</span>
 </footer>
 
@@ -1040,12 +1046,12 @@ a { color: inherit; text-decoration: none; }
 
   /* ─── PROJECT DATA ─── */
   const projects = [
-    { num: '01', title: 'Honey & Co.',     type: 'Brand · Packaging',   tag: 'Professional', bg: '#F2DCC8', ink: '#5C3A0E', accent: '#BA7517', year: '2025' },
-    { num: '02', title: 'Parkside FC',     type: 'Visual Identity',     tag: 'Personal',     bg: '#D8E3D4', ink: '#1F3517', accent: '#4A6B3F', year: '2025' },
-    { num: '03', title: 'Soft Magazine',   type: 'Editorial · Art Dir.', tag: 'Educational',  bg: '#F0D5D5', ink: '#4D1A2A', accent: '#993556', year: '2024' },
-    { num: '04', title: 'Loop Studio',     type: 'Web · Identity',      tag: 'Professional', bg: '#DCD7EE', ink: '#1F1A4D', accent: '#3C3489', year: '2024' },
-    { num: '05', title: 'Cross/Section',   type: 'Spatial · Install.',  tag: 'Educational',  bg: '#E4DBC4', ink: '#2A1F0A', accent: '#0E0B08', year: '2023' },
-    { num: '06', title: 'Studio Year One', type: 'Self-initiated',      tag: 'Personal',     bg: '#0E0B08', ink: '#F0EBE0', accent: '#E94A1F', year: '2026' },
+    { num: '01', title: 'Pemimpin Terrace', type: 'Landed Residential',   tag: 'Professional', bg: '#DCE9FF', ink: '#0B1830', accent: '#315FAD', year: '2025' },
+    { num: '02', title: 'Jalan Unggas',     type: 'Spatial · Facade',     tag: 'Professional', bg: '#EEF4FF', ink: '#10213D', accent: '#4D7FC4', year: '2025' },
+    { num: '03', title: 'ReLeaf',           type: 'Biophilic Therapy',    tag: 'Awarded',      bg: '#DDEEEA', ink: '#102A30', accent: '#387D8A', year: '2025' },
+    { num: '04', title: 'The Meridian',     type: 'Urban · Environmental', tag: 'Academic',    bg: '#E4E9F7', ink: '#162037', accent: '#5B70B8', year: '2024' },
+    { num: '05', title: 'Sit in with Tiffin', type: 'Installation',       tag: 'Archifest',    bg: '#F1EBDD', ink: '#282018', accent: '#557DBA', year: '2025' },
+    { num: '06', title: 'The Pitstop',       type: 'Experience · Space',  tag: 'Academic',     bg: '#080A0F', ink: '#F2F6FF', accent: '#6EA8FF', year: '2025' },
   ];
 
   /* ─── SCENE ─── */
@@ -1089,7 +1095,7 @@ a { color: inherit; text-decoration: none; }
 
     // top: number + tag
     ctx.fillStyle = p.ink;
-    ctx.font = "500 18px 'JetBrains Mono', monospace";
+    ctx.font = "500 18px 'Geist Mono', monospace";
     ctx.textAlign = 'left';
     ctx.fillText(p.num, 44, 64);
     ctx.textAlign = 'right';
@@ -1099,7 +1105,7 @@ a { color: inherit; text-decoration: none; }
     ctx.fillStyle = p.accent;
     ctx.textAlign = 'center';
     const titleSize = p.title.length > 14 ? 76 : 96;
-    ctx.font = `italic 400 ${titleSize}px 'Fraunces', 'Times New Roman', serif`;
+    ctx.font = `500 ${titleSize}px 'Geist', Arial, sans-serif`;
     // simple word wrap
     const words = p.title.split(' ');
     const lines = [];
@@ -1115,11 +1121,11 @@ a { color: inherit; text-decoration: none; }
 
     // type label below title
     ctx.fillStyle = p.ink;
-    ctx.font = "500 16px 'JetBrains Mono', monospace";
+    ctx.font = "500 16px 'Geist Mono', monospace";
     ctx.fillText(p.type.toUpperCase(), 300, startY + lines.length * titleSize * 1.1 + 32);
 
     // bottom: year + accent dot
-    ctx.font = "500 14px 'JetBrains Mono', monospace";
+    ctx.font = "500 14px 'Geist Mono', monospace";
     ctx.textAlign = 'left';
     ctx.fillText(p.year, 44, 856);
     ctx.textAlign = 'right';
@@ -1170,7 +1176,7 @@ a { color: inherit; text-decoration: none; }
   }
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
   const pMat = new THREE.PointsMaterial({
-    color: 0xfff0d8,
+    color: 0xdce9ff,
     size: 0.025,
     transparent: true,
     opacity: 0.6,
@@ -1195,6 +1201,12 @@ a { color: inherit; text-decoration: none; }
     const total = workSection.offsetHeight - window.innerHeight;
     const passed = -rect.top;
     scrollProg = Math.max(0, Math.min(1, passed / total));
+
+    // only show the 3D project cards while the work gallery is actually in view
+    const visibleAmount = Math.max(0, Math.min(window.innerHeight, rect.bottom) - Math.max(0, rect.top));
+    const isWorkVisible = visibleAmount > window.innerHeight * 0.18;
+    const hasStartedGallery = passed > window.innerHeight * 0.08;
+    canvas.style.opacity = (isWorkVisible && hasStartedGallery) ? '1' : '0';
 
     // camera flies from before the first card to past the last
     const start = -2;
