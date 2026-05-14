@@ -92,31 +92,28 @@ a { color: inherit; text-decoration: none; }
 .cursor {
   position: fixed;
   top: 0; left: 0;
-  min-width: 112px;
-  height: 30px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(242,246,255,0.18);
-  background: rgba(8,10,15,0.86);
-  color: var(--ink);
+  min-width: 82px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+  display: block;
+  white-space: pre;
   pointer-events: none;
   z-index: 1000;
   transform: translate(-50%, -50%);
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.2s ease;
-  backdrop-filter: blur(10px);
+  transition: opacity 0.2s ease;
+  text-shadow: 0 0 14px rgba(110,168,255,0.25);
 }
 .cursor.is-hover {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
+  color: var(--accent);
 }
 @media (max-width: 900px) { .cursor { display: none; } }
 
@@ -558,7 +555,7 @@ a { color: inherit; text-decoration: none; }
 .about-facts li span:first-child { color: var(--muted); }
 
 /* ════════════════════════════════════════════
-   SHELF
+   MACOS FILE SHELF
    ════════════════════════════════════════════ */
 .books {
   padding: 80px 0 160px;
@@ -567,107 +564,152 @@ a { color: inherit; text-decoration: none; }
   z-index: 3;
 }
 .shelf-wrap {
-  margin-top: 28px;
+  margin-top: 30px;
 }
 .shelf-scene {
   position: relative;
-  min-height: 650px;
+  min-height: 720px;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(242,246,255,0.02), rgba(110,168,255,0.05));
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(110,168,255,0.12), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(242,246,255,0.06), transparent 22%),
+    linear-gradient(180deg, rgba(242,246,255,0.025), rgba(110,168,255,0.045));
   overflow: hidden;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.shelf-scene::before {
+  content: '';
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(242,246,255,0.05);
+  border-radius: 22px;
+  pointer-events: none;
 }
 .shelf-backdrop {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(110,168,255,0.11), transparent 28%),
-    radial-gradient(circle at 80% 18%, rgba(242,246,255,0.06), transparent 20%),
-    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background-image:
+    linear-gradient(rgba(242,246,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,246,255,0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
 }
-.shelf-plank {
-  position: absolute;
-  left: 32px;
-  right: 32px;
-  height: 16px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgba(242,246,255,0.18), rgba(242,246,255,0.08));
-  border: 1px solid rgba(242,246,255,0.1);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
-}
-.shelf-plank.top { top: 258px; }
-.shelf-plank.bottom { top: 502px; }
+.shelf-plank { display: none; }
 .shelf-item {
+  --r: 0deg;
+  --delay: 0ms;
   position: absolute;
   appearance: none;
   background: transparent;
   border: 0;
   color: inherit;
   cursor: none;
-  width: 120px;
-  text-align: center;
+  width: 168px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(74px) scale(0.84) rotate(0deg);
+  transform-origin: center bottom;
+  filter: blur(3px);
+  transition:
+    opacity 0.55s cubic-bezier(0.2,0.8,0.2,1) var(--delay),
+    transform 0.72s cubic-bezier(0.18,0.9,0.18,1) var(--delay),
+    filter 0.55s ease var(--delay);
+}
+.shelf-wrap.is-shelf-in .shelf-item {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(var(--r));
+  filter: blur(0);
+}
+.shelf-item:hover,
+.shelf-item:focus-visible {
+  z-index: 10;
+  transform: translateY(-14px) scale(1.05) rotate(0deg) !important;
 }
 .shelf-item .item-art {
-  width: 92px;
-  height: 110px;
-  margin: 0 auto 14px;
+  width: 100%;
+  height: 198px;
+  margin: 0;
+  padding: 10px 10px 46px;
+  border-radius: 10px;
+  background: #F7F8FB;
+  border: 1px solid rgba(8,10,15,0.08);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.28), 0 2px 0 rgba(255,255,255,0.28) inset;
   display: grid;
-  place-items: end center;
-  transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), opacity 0.35s ease;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.shelf-item .item-art::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  right: 10px;
+  height: 112px;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 24% 28%, rgba(110,168,255,0.55), transparent 20%),
+    linear-gradient(135deg, rgba(8,10,15,0.16), rgba(110,168,255,0.16));
+  border: 1px solid rgba(8,10,15,0.06);
+}
+.shelf-item .item-art::after {
+  content: attr(data-file);
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 13px;
+  color: #080A0F;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .shelf-item svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+  position: relative;
+  z-index: 2;
+  width: 72px;
+  height: 72px;
+  opacity: 0.92;
 }
-.shelf-item .line {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 2.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.shelf-item .soft {
-  fill: none;
-  stroke: rgba(242,246,255,0.26);
-  stroke-width: 2.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
+.shelf-item .line,
+.shelf-item .soft,
 .shelf-item .accent-line {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.4;
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.shelf-item .line { stroke: #080A0F; }
+.shelf-item .soft { stroke: rgba(8,10,15,0.28); }
+.shelf-item .accent-line { stroke: #315FAD; }
 .shelf-item .item-name {
   display: block;
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 5px 8px;
+  border-radius: 6px;
   font-family: var(--mono);
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  transition: color 0.25s ease;
-}
-.shelf-item:hover .item-art,
-.shelf-item:focus-visible .item-art {
-  transform: translateY(-8px) rotate(-2deg);
-}
-.shelf-item:hover .item-name,
-.shelf-item:focus-visible .item-name {
+  letter-spacing: 0.12em;
   color: var(--ink);
+  background: rgba(8,10,15,0.45);
+  border: 1px solid rgba(242,246,255,0.08);
+  text-align: center;
 }
-.shelf-item.item-1 { left: 7%;  top: 128px; }
-.shelf-item.item-2 { left: 25%; top: 140px; }
-.shelf-item.item-3 { left: 43%; top: 116px; }
-.shelf-item.item-4 { left: 63%; top: 132px; }
-.shelf-item.item-5 { left: 80%; top: 150px; }
-.shelf-item.item-6 { left: 14%; top: 370px; }
-.shelf-item.item-7 { left: 36%; top: 356px; }
-.shelf-item.item-8 { left: 58%; top: 382px; }
-.shelf-item.item-9 { left: 79%; top: 362px; }
+.shelf-item.item-1 { left: 7%;  top: 72px;  --r: -7deg; --delay: 40ms; }
+.shelf-item.item-2 { left: 25%; top: 132px; --r: 4deg;  --delay: 120ms; }
+.shelf-item.item-3 { left: 44%; top: 84px;  --r: -2deg; --delay: 200ms; }
+.shelf-item.item-4 { left: 65%; top: 148px; --r: 6deg;  --delay: 280ms; }
+.shelf-item.item-5 { left: 81%; top: 76px;  --r: -5deg; --delay: 360ms; }
+.shelf-item.item-6 { left: 13%; top: 400px; --r: 5deg;  --delay: 160ms; }
+.shelf-item.item-7 { left: 34%; top: 340px; --r: -4deg; --delay: 240ms; }
+.shelf-item.item-8 { left: 56%; top: 408px; --r: 3deg;  --delay: 320ms; }
+.shelf-item.item-9 { left: 77%; top: 350px; --r: -6deg; --delay: 400ms; }
 .shelf-note {
   margin-top: 18px;
   font-family: var(--mono);
@@ -923,16 +965,15 @@ a { color: inherit; text-decoration: none; }
   .about-aside { position: relative; top: 0; max-width: 360px; }
   .about-facts { grid-template-columns: 1fr; gap: 0; }
 
-  .shelf-scene { min-height: 980px; border-radius: 20px; }
-  .shelf-plank.top { top: 350px; }
-  .shelf-plank.bottom { top: 705px; }
-  .shelf-item { width: 108px; }
-  .shelf-item.item-1 { left: 6%; top: 190px; }
-  .shelf-item.item-2 { left: 33%; top: 200px; }
-  .shelf-item.item-3 { left: 62%; top: 172px; }
-  .shelf-item.item-4 { left: 15%; top: 534px; }
-  .shelf-item.item-5 { left: 49%; top: 550px; }
-  .shelf-item.item-6 { left: 71%; top: 520px; }
+  .shelf-scene { min-height: 1040px; border-radius: 20px; }
+  .shelf-item { width: 138px; }
+  .shelf-item .item-art { height: 168px; }
+  .shelf-item.item-1 { left: 6%; top: 86px; }
+  .shelf-item.item-2 { left: 51%; top: 140px; }
+  .shelf-item.item-3 { left: 11%; top: 348px; }
+  .shelf-item.item-4 { left: 53%; top: 396px; }
+  .shelf-item.item-5 { left: 8%; top: 620px; }
+  .shelf-item.item-6 { left: 54%; top: 674px; }
   .shelf-item.item-7 { display: none; }
   .shelf-item.item-8 { display: none; }
   .shelf-item.item-9 { display: none; }
@@ -958,7 +999,7 @@ a { color: inherit; text-decoration: none; }
 <nav class="nav">
   <a class="nav-brand" href="#top" data-cursor>
     <span class="dot"></span>
-    <span>Nikhi</span>     <!-- TODO -->
+    <span>work</span>
   </a>
   <ul class="nav-links">
     <li><a href="#work" data-cursor>Work</a></li>
@@ -1110,39 +1151,39 @@ a { color: inherit; text-decoration: none; }
       <div class="shelf-plank bottom"></div>
 
       <button class="shelf-item item-1" data-cursor data-shelf-title="Moka ritual" data-shelf-desc="A little daily ceremony. I love the tiny routine of grinding beans, making coffee, and pretending I have my life together before the day properly starts.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M30 18h30l8 16-7 44H29l-7-44z"/><path class="line" d="M34 78v10h22V78"/><path class="line" d="M36 18V8h18v10"/><path class="line" d="M61 35h10c7 0 8 10 0 12h-8"/><path class="accent-line" d="M38 48h14"/></svg></span>
+        <span class="item-art" data-file="coffee.exe"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M30 18h30l8 16-7 44H29l-7-44z"/><path class="line" d="M34 78v10h22V78"/><path class="line" d="M36 18V8h18v10"/><path class="line" d="M61 35h10c7 0 8 10 0 12h-8"/><path class="accent-line" d="M38 48h14"/></svg></span>
         <span class="item-name">Moka pot</span>
       </button>
       <button class="shelf-item item-2" data-cursor data-shelf-title="Café notebook" data-shelf-desc="I’m always jotting down visual details, phrases, coffee spots, layout ideas, or random thoughts I feel weirdly convinced I’ll use later.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="20" y="14" width="48" height="72" rx="6"/><path class="line" d="M32 14v72"/><path class="soft" d="M40 34h18M40 46h14M40 58h18"/><path class="accent-line" d="M26 24h6"/></svg></span>
+        <span class="item-art" data-file="cafe-notes.txt"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="20" y="14" width="48" height="72" rx="6"/><path class="line" d="M32 14v72"/><path class="soft" d="M40 34h18M40 46h14M40 58h18"/><path class="accent-line" d="M26 24h6"/></svg></span>
         <span class="item-name">Notebook</span>
       </button>
       <button class="shelf-item item-3" data-cursor data-shelf-title="Nicco’s toy" data-shelf-desc="Anything that belongs to Nicco somehow ends up everywhere. This is very representative of both my actual shelf and my life.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><circle class="line" cx="44" cy="52" r="24"/><path class="line" d="M44 28c10 10 10 38 0 48M20 52c10-10 38-10 48 0"/><circle class="accent-line" cx="44" cy="52" r="5"/></svg></span>
+        <span class="item-art" data-file="nicco-ball.mov"><svg viewBox="0 0 90 110" aria-hidden="true"><circle class="line" cx="44" cy="52" r="24"/><path class="line" d="M44 28c10 10 10 38 0 48M20 52c10-10 38-10 48 0"/><circle class="accent-line" cx="44" cy="52" r="5"/></svg></span>
         <span class="item-name">Dog ball</span>
       </button>
       <button class="shelf-item item-4" data-cursor data-shelf-title="Little camera" data-shelf-desc="I’m always collecting references — textures, corners, signage, facades, accidental compositions. The camera is less about photography and more about noticing.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="16" y="32" width="58" height="36" rx="8"/><circle class="line" cx="45" cy="50" r="12"/><path class="line" d="M28 32l6-10h20l5 10"/><circle class="accent-line" cx="63" cy="42" r="2.5"/></svg></span>
+        <span class="item-art" data-file="refs.jpg"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="16" y="32" width="58" height="36" rx="8"/><circle class="line" cx="45" cy="50" r="12"/><path class="line" d="M28 32l6-10h20l5 10"/><circle class="accent-line" cx="63" cy="42" r="2.5"/></svg></span>
         <span class="item-name">Camera</span>
       </button>
       <button class="shelf-item item-5" data-cursor data-shelf-title="Ribbon clip" data-shelf-desc="A slightly silly, slightly cute object — which is honestly my favourite kind. I like small things that make a space or outfit feel a bit more considered.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M45 34c-7-15-28-12-28 4 0 13 13 18 22 16"/><path class="line" d="M45 34c7-15 28-12 28 4 0 13-13 18-22 16"/><path class="line" d="M39 54l-9 29 15-10 15 10-9-29"/><circle class="accent-line" cx="45" cy="54" r="6"/></svg></span>
+        <span class="item-art" data-file="soft-objects.png"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M45 34c-7-15-28-12-28 4 0 13 13 18 22 16"/><path class="line" d="M45 34c7-15 28-12 28 4 0 13-13 18-22 16"/><path class="line" d="M39 54l-9 29 15-10 15 10-9-29"/><circle class="accent-line" cx="45" cy="54" r="6"/></svg></span>
         <span class="item-name">Ribbon</span>
       </button>
       <button class="shelf-item item-6" data-cursor data-shelf-title="Shell from a trip" data-shelf-desc="I like keeping little objects that pin a memory in place. They’re tiny souvenirs, but also mood pieces — texture, tone, a reminder of being elsewhere.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M20 72c2-24 18-38 26-38 8 0 24 14 26 38"/><path class="soft" d="M30 68c1-15 9-24 16-24 7 0 15 9 16 24"/><path class="soft" d="M38 68c0-10 4-16 8-16 4 0 8 6 8 16"/></svg></span>
+        <span class="item-art" data-file="shell.mem"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M20 72c2-24 18-38 26-38 8 0 24 14 26 38"/><path class="soft" d="M30 68c1-15 9-24 16-24 7 0 15 9 16 24"/><path class="soft" d="M38 68c0-10 4-16 8-16 4 0 8 6 8 16"/></svg></span>
         <span class="item-name">Shell</span>
       </button>
       <button class="shelf-item item-7" data-cursor data-shelf-title="Desk lamp" data-shelf-desc="I’m extremely susceptible to good lighting. Warm pools of light, café corners, and soft shadows make me disproportionately happy.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M32 24h22l-14 18H20z"/><path class="line" d="M40 42l8 20"/><path class="line" d="M48 62l-14 18"/><path class="line" d="M24 80h34"/><path class="accent-line" d="M31 30h13"/></svg></span>
+        <span class="item-art" data-file="lamp.sketch"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M32 24h22l-14 18H20z"/><path class="line" d="M40 42l8 20"/><path class="line" d="M48 62l-14 18"/><path class="line" d="M24 80h34"/><path class="accent-line" d="M31 30h13"/></svg></span>
         <span class="item-name">Lamp</span>
       </button>
       <button class="shelf-item item-8" data-cursor data-shelf-title="Reference stack" data-shelf-desc="Printouts, torn pages, project notes, screenshots, scraps. My process is rarely neat at first — it starts as a growing pile of things that feel right.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="22" y="28" width="34" height="44" rx="4" transform="rotate(-8 39 50)"/><rect class="line" x="30" y="34" width="34" height="44" rx="4" transform="rotate(6 47 56)"/><path class="accent-line" d="M38 42h14"/></svg></span>
+        <span class="item-art" data-file="reference-stack.zip"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="22" y="28" width="34" height="44" rx="4" transform="rotate(-8 39 50)"/><rect class="line" x="30" y="34" width="34" height="44" rx="4" transform="rotate(6 47 56)"/><path class="accent-line" d="M38 42h14"/></svg></span>
         <span class="item-name">References</span>
       </button>
       <button class="shelf-item item-9" data-cursor data-shelf-title="Mini tiffin" data-shelf-desc="A tiny nod to Sit in with Tiffin and the kind of storytelling-through-objects I always come back to — layered, familiar, and a little playful.">
-        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="26" y="28" width="28" height="14" rx="4"/><rect class="line" x="24" y="44" width="32" height="16" rx="4"/><rect class="line" x="22" y="62" width="36" height="18" rx="4"/><path class="line" d="M34 28c0-6 4-10 8-10s8 4 8 10"/><path class="accent-line" d="M24 52h32"/></svg></span>
+        <span class="item-art" data-file="mini-tiffin.obj"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="26" y="28" width="28" height="14" rx="4"/><rect class="line" x="24" y="44" width="32" height="16" rx="4"/><rect class="line" x="22" y="62" width="36" height="18" rx="4"/><path class="line" d="M34 28c0-6 4-10 8-10s8 4 8 10"/><path class="accent-line" d="M24 52h32"/></svg></span>
         <span class="item-name">Mini tiffin</span>
       </button>
     </div>
@@ -1486,7 +1527,7 @@ a { color: inherit; text-decoration: none; }
   function loop() {
     cx += (tx - cx) * 0.25;
     cy += (ty - cy) * 0.25;
-    cursor.textContent = `${Math.round(tx)}px · ${Math.round(ty)}px`;
+    cursor.textContent = `X: ${Math.round(tx)}PX\nY: ${Math.round(ty)}PX`;
     cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
     requestAnimationFrame(loop);
   }
@@ -1518,6 +1559,16 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   const title = document.getElementById('shelf-modal-title');
   const desc = document.getElementById('shelf-modal-desc');
   const closeBtn = document.getElementById('shelf-close');
+  const shelfWrap = document.querySelector('.shelf-wrap');
+
+  if (shelfWrap) {
+    const shelfObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        shelfWrap.classList.toggle('is-shelf-in', entry.isIntersecting);
+      });
+    }, { threshold: 0.28 });
+    shelfObserver.observe(shelfWrap);
+  }
 
   function openModal(item) {
     title.textContent = item.dataset.shelfTitle || '';
