@@ -41,6 +41,7 @@ body {
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.55;
+  font-weight: 420;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   cursor: none;        /* custom cursor */
@@ -91,18 +92,31 @@ a { color: inherit; text-decoration: none; }
 .cursor {
   position: fixed;
   top: 0; left: 0;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
+  min-width: 112px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(242,246,255,0.18);
+  background: rgba(8,10,15,0.86);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
   pointer-events: none;
   z-index: 1000;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
-  mix-blend-mode: difference;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 .cursor.is-hover {
-  width: 34px; height: 34px;
-  background: var(--ink);
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
 @media (max-width: 900px) { .cursor { display: none; } }
 
@@ -140,7 +154,7 @@ a { color: inherit; text-decoration: none; }
   top: 0; left: 0; right: 0;
   z-index: 50;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 24px var(--pad);
   mix-blend-mode: difference;
@@ -214,7 +228,7 @@ a { color: inherit; text-decoration: none; }
 
 .hero h1 {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 460;
   font-size: clamp(64px, 13vw, 240px);
   line-height: 0.85;
   letter-spacing: -0.045em;
@@ -225,11 +239,11 @@ a { color: inherit; text-decoration: none; }
   font-style: italic;
   color: var(--accent);
   
-  font-weight: 300;
+  font-weight: 450;
 }
 .hero h1 .stroke {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
+  color: var(--ink);
+  -webkit-text-stroke: 0 transparent;
 }
 
 .hero-foot {
@@ -242,11 +256,9 @@ a { color: inherit; text-decoration: none; }
   gap: 40px;
 }
 .hero-intro {
-  max-width: 380px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(242,246,255,0.72);
+  display: none;
 }
+
 .hero-meta {
   font-family: var(--mono);
   font-size: 11px;
@@ -260,28 +272,8 @@ a { color: inherit; text-decoration: none; }
 /* ════════════════════════════════════════════
    MARQUEE
    ════════════════════════════════════════════ */
-.marquee {
-  overflow: hidden;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 18px 0;
-  background: rgba(8, 10, 15, 0.52);
-  backdrop-filter: blur(12px);
-  position: relative;
-  z-index: 3;
-}
-.marquee-track {
-  display: flex;
-  gap: 64px;
-  white-space: nowrap;
-  animation: scroll 50s linear infinite;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(15px, 1.8vw, 26px);
-  font-weight: 300;
-  width: max-content;
-}
-.marquee-track .star { color: var(--accent); font-style: normal; }
+.marquee { display: none; }
+.marquee-track { display: none; }
 @keyframes scroll { to { transform: translateX(-50%); } }
 
 /* ════════════════════════════════════════════
@@ -297,7 +289,7 @@ a { color: inherit; text-decoration: none; }
 }
 .section-head h2 {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 430;
   font-size: clamp(48px, 8vw, 120px);
   line-height: 0.9;
   letter-spacing: -0.035em;
@@ -338,6 +330,8 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   padding: 100px var(--pad) 72px;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 .work-sticky > * { pointer-events: auto; }
 
@@ -350,7 +344,7 @@ a { color: inherit; text-decoration: none; }
 }
 .work-header h2 {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: 430;
   font-size: clamp(40px, 6vw, 88px);
   line-height: 0.9;
   letter-spacing: -0.035em;
@@ -390,17 +384,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .work-hint {
-  position: absolute;
-  left: var(--pad);
-  bottom: 34px;
-  max-width: 280px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--muted);
   text-align: left;
-  opacity: 0.72;
+  align-self: flex-start;
+  opacity: 0.7;
 }
 .work-hint span { color: var(--accent); }
 
@@ -458,7 +449,7 @@ a { color: inherit; text-decoration: none; }
 .exp-role {
   font-family: var(--serif);
   font-size: clamp(28px, 3.2vw, 44px);
-  font-weight: 300;
+  font-weight: 430;
   letter-spacing: -0.02em;
   line-height: 1.05;
   
@@ -538,7 +529,7 @@ a { color: inherit; text-decoration: none; }
 .about-text p {
   font-family: var(--serif);
   font-size: clamp(22px, 2.4vw, 36px);
-  font-weight: 300;
+  font-weight: 390;
   line-height: 1.35;
   letter-spacing: -0.015em;
   margin-bottom: 32px;
@@ -567,7 +558,7 @@ a { color: inherit; text-decoration: none; }
 .about-facts li span:first-child { color: var(--muted); }
 
 /* ════════════════════════════════════════════
-   BOOKS
+   SHELF
    ════════════════════════════════════════════ */
 .books {
   padding: 80px 0 160px;
@@ -575,95 +566,252 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   z-index: 3;
 }
-.books-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 56px 36px;
-  margin-top: 40px;
+.shelf-wrap {
+  margin-top: 28px;
 }
-.book { color: inherit; }
-.book-cover {
-  aspect-ratio: 2/3;
-  border-radius: 2px;
+.shelf-scene {
   position: relative;
+  min-height: 650px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(242,246,255,0.02), rgba(110,168,255,0.05));
   overflow: hidden;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 4px 20px -4px rgba(0,0,0,0.4), 0 20px 50px -16px rgba(0,0,0,0.5);
-  transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
-  transform-origin: bottom center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.book:nth-child(3n+1) .book-cover { transform: rotate(-2deg); }
-.book:nth-child(3n+2) .book-cover { transform: rotate(1.5deg); }
-.book:nth-child(3n+3) .book-cover { transform: rotate(-0.5deg); }
-.book:hover .book-cover { transform: rotate(0) translateY(-12px) scale(1.04); }
-
-.book-cover-title {
-  font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+.shelf-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(110,168,255,0.11), transparent 28%),
+    radial-gradient(circle at 80% 18%, rgba(242,246,255,0.06), transparent 20%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
 }
-.book-cover-author {
+.shelf-plank {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  height: 16px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(242,246,255,0.18), rgba(242,246,255,0.08));
+  border: 1px solid rgba(242,246,255,0.1);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+}
+.shelf-plank.top { top: 258px; }
+.shelf-plank.bottom { top: 502px; }
+.shelf-item {
+  position: absolute;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: none;
+  width: 120px;
+  text-align: center;
+}
+.shelf-item .item-art {
+  width: 92px;
+  height: 110px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: end center;
+  transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), opacity 0.35s ease;
+}
+.shelf-item svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.shelf-item .line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shelf-item .soft {
+  fill: none;
+  stroke: rgba(242,246,255,0.26);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shelf-item .accent-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.shelf-item .item-name {
+  display: block;
   font-family: var(--mono);
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.25s ease;
 }
-.book-info {
-  margin-top: 20px;
+.shelf-item:hover .item-art,
+.shelf-item:focus-visible .item-art {
+  transform: translateY(-8px) rotate(-2deg);
+}
+.shelf-item:hover .item-name,
+.shelf-item:focus-visible .item-name {
+  color: var(--ink);
+}
+.shelf-item.item-1 { left: 7%;  top: 128px; }
+.shelf-item.item-2 { left: 25%; top: 140px; }
+.shelf-item.item-3 { left: 43%; top: 116px; }
+.shelf-item.item-4 { left: 63%; top: 132px; }
+.shelf-item.item-5 { left: 80%; top: 150px; }
+.shelf-item.item-6 { left: 14%; top: 370px; }
+.shelf-item.item-7 { left: 36%; top: 356px; }
+.shelf-item.item-8 { left: 58%; top: 382px; }
+.shelf-item.item-9 { left: 79%; top: 362px; }
+.shelf-note {
+  margin-top: 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-align: right;
+}
+.shelf-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,10,15,0.55);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.shelf-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.shelf-modal-card {
+  width: min(420px, 100%);
+  background: rgba(8,10,15,0.96);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+.shelf-modal-top {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 12px;
 }
-.book-info-title { font-weight: 500; font-size: 14px; }
-.book-info-note { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
-
-.cover-1 { background: #080A0F; color: #F2F6FF; border: 1px solid rgba(242,246,255,0.15); }
-.cover-1 .book-cover-author { color: #6EA8FF; }
-.cover-2 { background: #CFE0FF; color: #080A0F; }
-.cover-3 { background: #1A2436; color: #DCE8FF; }
-.cover-3 .book-cover-author { color: #9EC5FF; }
-.cover-4 { background: #102D3E; color: #D5F1FF; }
-.cover-4 .book-cover-author { color: #7DBEEE; }
-.cover-5 { background: #E8EEF8; color: #172033; }
-.cover-5 .book-cover-author { color: #4D7FC4; }
-.cover-6 { background: #F2F6FF; color: #080A0F; }
-.cover-6 .book-cover-author { color: #4D7FC4; }
+.shelf-modal-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.shelf-modal-title {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 460;
+}
+.shelf-modal-desc {
+  color: rgba(242,246,255,0.78);
+  line-height: 1.65;
+}
+.shelf-close {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  font-size: 20px;
+  line-height: 1;
+}
 
 /* ════════════════════════════════════════════
    CONTACT
    ════════════════════════════════════════════ */
 .contact {
-  padding: 160px 0 100px;
+  padding: 120px 0 90px;
   background: var(--bg);
   position: relative;
   z-index: 3;
   border-top: 1px solid var(--line);
   text-align: center;
 }
-.contact h2 {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(80px, 18vw, 320px);
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  margin-bottom: 48px;
-  font-variation-settings: 'opsz' 144, 'SOFT' 80;
+.doodle-wrap {
+  width: min(980px, 100%);
+  margin: 0 auto 34px;
+  padding: 8px 0 0;
 }
-.contact h2 em {
-  font-style: italic;
-  color: var(--accent);
-  
+.contact-doodle {
+  width: 100%;
+  height: auto;
+}
+.contact-doodle .line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-doodle .soft {
+  fill: none;
+  stroke: rgba(242,246,255,0.22);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-doodle .accent-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.contact-doodle .ground {
+  stroke: rgba(242,246,255,0.18);
+}
+.contact-doodle .ball-throw {
+  animation: ballThrow 5.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.contact-doodle .dog-group {
+  animation: dogFetch 5.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.contact-doodle .tail {
+  animation: tailWag 0.3s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+.contact-doodle .return-ball {
+  animation: returnBall 5.6s ease-in-out infinite;
+}
+.contact-kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
 .contact-email {
   font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(28px, 4.5vw, 56px);
+  font-style: normal;
+  font-size: clamp(22px, 2.8vw, 34px);
   display: inline-block;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--ink);
@@ -674,11 +822,17 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
   letter-spacing: 0.005em;
 }
-
+.contact-note {
+  margin: 18px auto 0;
+  max-width: 560px;
+  color: rgba(242,246,255,0.68);
+  font-size: 14px;
+  line-height: 1.7;
+}
 .contact-socials {
-  margin-top: 80px;
+  margin-top: 34px;
   display: flex;
-  gap: 40px;
+  gap: 32px;
   justify-content: center;
   font-family: var(--mono);
   font-size: 12px;
@@ -699,6 +853,30 @@ a { color: inherit; text-decoration: none; }
 }
 .contact-socials a:hover { color: var(--ink); }
 .contact-socials a:hover::after { transform: translate(3px, -3px); }
+
+@keyframes ballThrow {
+  0%, 8%   { transform: translate(0px, 0px); opacity: 0; }
+  10%      { opacity: 1; }
+  26%      { transform: translate(190px, -95px); opacity: 1; }
+  40%      { transform: translate(390px, 0px); opacity: 1; }
+  41%, 100%{ transform: translate(390px, 0px); opacity: 0; }
+}
+@keyframes dogFetch {
+  0%, 16%  { transform: translateX(0) scaleX(1); }
+  42%      { transform: translateX(420px) scaleX(1); }
+  52%      { transform: translateX(420px) scaleX(-1); }
+  86%      { transform: translateX(0) scaleX(-1); }
+  100%     { transform: translateX(0) scaleX(1); }
+}
+@keyframes tailWag {
+  from { transform: rotate(-5deg); }
+  to   { transform: rotate(8deg); }
+}
+@keyframes returnBall {
+  0%, 50%  { opacity: 0; }
+  51%, 86% { opacity: 1; }
+  87%, 100%{ opacity: 0; }
+}
 
 /* ════════════════════════════════════════════
    FOOTER
@@ -745,8 +923,21 @@ a { color: inherit; text-decoration: none; }
   .about-aside { position: relative; top: 0; max-width: 360px; }
   .about-facts { grid-template-columns: 1fr; gap: 0; }
 
-  .books-grid { gap: 48px 24px; }
-  .contact { padding: 100px 0 60px; }
+  .shelf-scene { min-height: 980px; border-radius: 20px; }
+  .shelf-plank.top { top: 350px; }
+  .shelf-plank.bottom { top: 705px; }
+  .shelf-item { width: 108px; }
+  .shelf-item.item-1 { left: 6%; top: 190px; }
+  .shelf-item.item-2 { left: 33%; top: 200px; }
+  .shelf-item.item-3 { left: 62%; top: 172px; }
+  .shelf-item.item-4 { left: 15%; top: 534px; }
+  .shelf-item.item-5 { left: 49%; top: 550px; }
+  .shelf-item.item-6 { left: 71%; top: 520px; }
+  .shelf-item.item-7 { display: none; }
+  .shelf-item.item-8 { display: none; }
+  .shelf-item.item-9 { display: none; }
+  .contact { padding: 84px 0 56px; }
+  .contact-socials { flex-wrap: wrap; gap: 18px 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -791,34 +982,11 @@ a { color: inherit; text-decoration: none; }
   </h1>
 
   <div class="hero-foot">
-    <p class="hero-intro reveal" data-delay="2">
-      <!-- TODO: your intro -->
-      Experiential designer based in Singapore, working across architecture, spatial stories, brand moments and the occasional personal experiment. Currently at WWM Design.
-    </p>
-    <div class="hero-meta reveal" data-delay="3">
+    <div class="hero-meta reveal" data-delay="2">
       Scroll to explore<span>↓ selected works</span>
     </div>
   </div>
 </header>
-
-
-<!-- ═════════ MARQUEE ═════════ -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span>spatial design&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>brand identity&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>art direction&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>packaging&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>editorial&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>personal projects&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>spatial design&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>brand identity&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>art direction&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>packaging&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>editorial&nbsp;&nbsp;<span class="star">✦</span></span>
-    <span>personal projects&nbsp;&nbsp;<span class="star">✦</span></span>
-  </div>
-</div>
 
 
 <!-- ═════════ WORK — 3D gallery ═════════ -->
@@ -932,99 +1100,108 @@ a { color: inherit; text-decoration: none; }
 <section class="books container">
   <div class="section-head">
     <h2 class="reveal">Things on my <em>shelf</em></h2>
-    <div class="meta reveal" data-delay="1">Collected · loved<br><span>Six little tells</span></div>
+    <div class="meta reveal" data-delay="1">Collected · loved<br><span>Tap to open</span></div>
   </div>
 
-  <div class="books-grid">
+  <div class="shelf-wrap reveal" data-delay="1">
+    <div class="shelf-scene">
+      <div class="shelf-backdrop"></div>
+      <div class="shelf-plank top"></div>
+      <div class="shelf-plank bottom"></div>
 
-    <a class="book reveal" href="#" data-cursor>
-      <div class="book-cover cover-1">
-        <span class="book-cover-author">Moka ritual</span>
-        <span class="book-cover-title">Coffee<br>things</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Moka pot</span>
-        <span class="book-info-note">Daily fuel</span>
-      </div>
-    </a>
-
-    <a class="book reveal" data-delay="1" href="#" data-cursor>
-      <div class="book-cover cover-2">
-        <span class="book-cover-author">Café notes</span>
-        <span class="book-cover-title">Tiny<br>notebook</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Café notebook</span>
-        <span class="book-info-note">Good light</span>
-      </div>
-    </a>
-
-    <a class="book reveal" data-delay="2" href="#" data-cursor>
-      <div class="book-cover cover-3">
-        <span class="book-cover-author">Nicco</span>
-        <span class="book-cover-title">Pup<br>chaos</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Nicco things</span>
-        <span class="book-info-note">Always near</span>
-      </div>
-    </a>
-
-    <a class="book reveal" href="#" data-cursor>
-      <div class="book-cover cover-4">
-        <span class="book-cover-author">Reference pile</span>
-        <span class="book-cover-title">Stairs<br>& signs</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Reference photos</span>
-        <span class="book-info-note">Ongoing</span>
-      </div>
-    </a>
-
-    <a class="book reveal" data-delay="1" href="#" data-cursor>
-      <div class="book-cover cover-5">
-        <span class="book-cover-author">Soft objects</span>
-        <span class="book-cover-title">Ribbons<br>& clips</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Soft objects</span>
-        <span class="book-info-note">Cute detail</span>
-      </div>
-    </a>
-
-    <a class="book reveal" data-delay="2" href="#" data-cursor>
-      <div class="book-cover cover-6">
-        <span class="book-cover-author">Design books</span>
-        <span class="book-cover-title">Still<br>books</span>
-      </div>
-      <div class="book-info">
-        <span class="book-info-title">Design books</span>
-        <span class="book-info-note">Kept close</span>
-      </div>
-    </a>
-
+      <button class="shelf-item item-1" data-cursor data-shelf-title="Moka ritual" data-shelf-desc="A little daily ceremony. I love the tiny routine of grinding beans, making coffee, and pretending I have my life together before the day properly starts.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M30 18h30l8 16-7 44H29l-7-44z"/><path class="line" d="M34 78v10h22V78"/><path class="line" d="M36 18V8h18v10"/><path class="line" d="M61 35h10c7 0 8 10 0 12h-8"/><path class="accent-line" d="M38 48h14"/></svg></span>
+        <span class="item-name">Moka pot</span>
+      </button>
+      <button class="shelf-item item-2" data-cursor data-shelf-title="Café notebook" data-shelf-desc="I’m always jotting down visual details, phrases, coffee spots, layout ideas, or random thoughts I feel weirdly convinced I’ll use later.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="20" y="14" width="48" height="72" rx="6"/><path class="line" d="M32 14v72"/><path class="soft" d="M40 34h18M40 46h14M40 58h18"/><path class="accent-line" d="M26 24h6"/></svg></span>
+        <span class="item-name">Notebook</span>
+      </button>
+      <button class="shelf-item item-3" data-cursor data-shelf-title="Nicco’s toy" data-shelf-desc="Anything that belongs to Nicco somehow ends up everywhere. This is very representative of both my actual shelf and my life.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><circle class="line" cx="44" cy="52" r="24"/><path class="line" d="M44 28c10 10 10 38 0 48M20 52c10-10 38-10 48 0"/><circle class="accent-line" cx="44" cy="52" r="5"/></svg></span>
+        <span class="item-name">Dog ball</span>
+      </button>
+      <button class="shelf-item item-4" data-cursor data-shelf-title="Little camera" data-shelf-desc="I’m always collecting references — textures, corners, signage, facades, accidental compositions. The camera is less about photography and more about noticing.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="16" y="32" width="58" height="36" rx="8"/><circle class="line" cx="45" cy="50" r="12"/><path class="line" d="M28 32l6-10h20l5 10"/><circle class="accent-line" cx="63" cy="42" r="2.5"/></svg></span>
+        <span class="item-name">Camera</span>
+      </button>
+      <button class="shelf-item item-5" data-cursor data-shelf-title="Ribbon clip" data-shelf-desc="A slightly silly, slightly cute object — which is honestly my favourite kind. I like small things that make a space or outfit feel a bit more considered.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M45 34c-7-15-28-12-28 4 0 13 13 18 22 16"/><path class="line" d="M45 34c7-15 28-12 28 4 0 13-13 18-22 16"/><path class="line" d="M39 54l-9 29 15-10 15 10-9-29"/><circle class="accent-line" cx="45" cy="54" r="6"/></svg></span>
+        <span class="item-name">Ribbon</span>
+      </button>
+      <button class="shelf-item item-6" data-cursor data-shelf-title="Shell from a trip" data-shelf-desc="I like keeping little objects that pin a memory in place. They’re tiny souvenirs, but also mood pieces — texture, tone, a reminder of being elsewhere.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M20 72c2-24 18-38 26-38 8 0 24 14 26 38"/><path class="soft" d="M30 68c1-15 9-24 16-24 7 0 15 9 16 24"/><path class="soft" d="M38 68c0-10 4-16 8-16 4 0 8 6 8 16"/></svg></span>
+        <span class="item-name">Shell</span>
+      </button>
+      <button class="shelf-item item-7" data-cursor data-shelf-title="Desk lamp" data-shelf-desc="I’m extremely susceptible to good lighting. Warm pools of light, café corners, and soft shadows make me disproportionately happy.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><path class="line" d="M32 24h22l-14 18H20z"/><path class="line" d="M40 42l8 20"/><path class="line" d="M48 62l-14 18"/><path class="line" d="M24 80h34"/><path class="accent-line" d="M31 30h13"/></svg></span>
+        <span class="item-name">Lamp</span>
+      </button>
+      <button class="shelf-item item-8" data-cursor data-shelf-title="Reference stack" data-shelf-desc="Printouts, torn pages, project notes, screenshots, scraps. My process is rarely neat at first — it starts as a growing pile of things that feel right.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="22" y="28" width="34" height="44" rx="4" transform="rotate(-8 39 50)"/><rect class="line" x="30" y="34" width="34" height="44" rx="4" transform="rotate(6 47 56)"/><path class="accent-line" d="M38 42h14"/></svg></span>
+        <span class="item-name">References</span>
+      </button>
+      <button class="shelf-item item-9" data-cursor data-shelf-title="Mini tiffin" data-shelf-desc="A tiny nod to Sit in with Tiffin and the kind of storytelling-through-objects I always come back to — layered, familiar, and a little playful.">
+        <span class="item-art"><svg viewBox="0 0 90 110" aria-hidden="true"><rect class="line" x="26" y="28" width="28" height="14" rx="4"/><rect class="line" x="24" y="44" width="32" height="16" rx="4"/><rect class="line" x="22" y="62" width="36" height="18" rx="4"/><path class="line" d="M34 28c0-6 4-10 8-10s8 4 8 10"/><path class="accent-line" d="M24 52h32"/></svg></span>
+        <span class="item-name">Mini tiffin</span>
+      </button>
+    </div>
+    <div class="shelf-note">Click around — each object opens a tiny note.</div>
   </div>
 </section>
 
+<div class="shelf-modal" id="shelf-modal" aria-hidden="true">
+  <div class="shelf-modal-card">
+    <div class="shelf-modal-top">
+      <div>
+        <div class="shelf-modal-kicker">On the shelf</div>
+        <h3 class="shelf-modal-title" id="shelf-modal-title">Object title</h3>
+      </div>
+      <button class="shelf-close" id="shelf-close" aria-label="Close">×</button>
+    </div>
+    <p class="shelf-modal-desc" id="shelf-modal-desc">Object description goes here.</p>
+  </div>
+</div>
 
 <!-- ═════════ CONTACT ═════════ -->
 <section class="contact" id="contact">
   <div class="container">
-    <h2 class="reveal">Let's <em>talk</em>.</h2>
-
-    <!-- TODO: email -->
+    <div class="contact-kicker reveal">Say hello</div>
+    <div class="doodle-wrap reveal">
+      <svg class="contact-doodle" viewBox="0 0 980 300" role="img" aria-label="A doodle of a girl throwing a ball and a dog fetching it.">
+        <path class="ground soft" d="M70 238H910"/>
+        <g class="girl-group">
+          <circle class="line" cx="132" cy="92" r="20"/>
+          <path class="line" d="M132 112v66"/>
+          <path class="line" d="M132 132l-34 26"/>
+          <path class="line" d="M132 132l42 18"/>
+          <path class="line" d="M132 178l-28 44"/>
+          <path class="line" d="M132 178l20 44"/>
+          <path class="accent-line" d="M166 147l32 0"/>
+        </g>
+        <circle class="ball-throw accent-line" cx="198" cy="147" r="7"/>
+        <g class="dog-group" transform="translate(250 0)">
+          <ellipse class="line" cx="0" cy="200" rx="42" ry="24"/>
+          <circle class="line" cx="48" cy="186" r="16"/>
+          <path class="line tail" d="M-38 192c-18-18-20-32-10-42"/>
+          <path class="line" d="M-22 220l-10 24"/>
+          <path class="line" d="M-3 220l-2 24"/>
+          <path class="line" d="M16 220l6 24"/>
+          <path class="line" d="M34 218l14 24"/>
+          <path class="line" d="M57 182l18-10"/>
+          <circle class="soft return-ball" cx="63" cy="189" r="5"/>
+        </g>
+      </svg>
+    </div>
     <a class="contact-email reveal" data-delay="1" href="mailto:hello@yourdomain.com" data-cursor>hello@yourdomain.com</a>
-
-    <div class="contact-socials reveal" data-delay="2">
-      <!-- TODO: LinkedIn URL -->
+    <p class="contact-note reveal" data-delay="2">A small doodle instead of the giant heading. If you want to work together, chat, or send me something nice, my inbox is open.</p>
+    <div class="contact-socials reveal" data-delay="3">
       <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener" data-cursor>LinkedIn</a>
-      <!-- TODO: Instagram URL (or delete) -->
       <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener" data-cursor>Instagram</a>
       <a href="mailto:hello@yourdomain.com" data-cursor>Email</a>
     </div>
   </div>
 </section>
-
 
 <!-- ═════════ FOOTER ═════════ -->
 <footer class="footer">
@@ -1152,6 +1329,8 @@ a { color: inherit; text-decoration: none; }
       side: THREE.DoubleSide,
       roughness: 0.65,
       metalness: 0,
+      transparent: true,
+      opacity: 1,
     });
     const mesh = new THREE.Mesh(geo, mat);
     mesh.position.x = i * cardSpacing;
@@ -1190,10 +1369,15 @@ a { color: inherit; text-decoration: none; }
   let scrollProg = 0;   // 0..1 through the work section
   let camTargetX = -1;
   const workSection = document.querySelector('.work-section');
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2(-10, -10);
+  let hoveredCard = null;
 
   window.addEventListener('mousemove', (e) => {
     targetX = (e.clientX / window.innerWidth) * 2 - 1;
     targetY = (e.clientY / window.innerHeight) * 2 - 1;
+    pointer.x = targetX;
+    pointer.y = -targetY;
   });
 
   function updateScroll() {
@@ -1248,11 +1432,27 @@ a { color: inherit; text-decoration: none; }
     camera.rotation.y = -mouseX * 0.06;
     camera.rotation.x = mouseY * 0.04;
 
-    // cards bob + breathe
+    // hover / focus state for project cards
+    if (scrollProg > 0.01 && scrollProg < 0.99 && canvas.style.opacity !== '0') {
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(cards, false);
+      hoveredCard = hits.length ? hits[0].object : null;
+    } else {
+      hoveredCard = null;
+    }
+
+    // cards bob + breathe + fade surrounding cards on hover
     cards.forEach((c, i) => {
+      const hoverActive = hoveredCard && hoveredCard === c;
+      const dimmed = hoveredCard && hoveredCard !== c;
       c.position.y = c.userData.baseY + Math.sin(t * 0.6 + i * 1.3) * 0.08;
       c.rotation.z = Math.sin(t * 0.4 + i) * 0.015;
       c.rotation.y = c.userData.baseRotY + Math.sin(t * 0.3 + i * 2) * 0.03;
+      const targetOpacity = dimmed ? 0.16 : 1;
+      c.material.opacity += (targetOpacity - c.material.opacity) * 0.12;
+      const scaleTarget = hoverActive ? 1.07 : 1;
+      c.scale.x += (scaleTarget - c.scale.x) * 0.1;
+      c.scale.y += (scaleTarget - c.scale.y) * 0.1;
     });
 
     // particles drift sideways with camera
@@ -1286,6 +1486,7 @@ a { color: inherit; text-decoration: none; }
   function loop() {
     cx += (tx - cx) * 0.25;
     cy += (ty - cy) * 0.25;
+    cursor.textContent = `${Math.round(tx)}px · ${Math.round(ty)}px`;
     cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
     requestAnimationFrame(loop);
   }
@@ -1307,6 +1508,35 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+
+
+/* ─── Shelf popups ─── */
+(function () {
+  const modal = document.getElementById('shelf-modal');
+  if (!modal) return;
+  const title = document.getElementById('shelf-modal-title');
+  const desc = document.getElementById('shelf-modal-desc');
+  const closeBtn = document.getElementById('shelf-close');
+
+  function openModal(item) {
+    title.textContent = item.dataset.shelfTitle || '';
+    desc.textContent = item.dataset.shelfDesc || '';
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('.shelf-item').forEach((item) => {
+    item.addEventListener('click', () => openModal(item));
+  });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+})();
 
 /* ─── Footer year ─── */
 document.getElementById('year').textContent = new Date().getFullYear();
